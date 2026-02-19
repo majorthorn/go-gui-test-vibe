@@ -29,7 +29,9 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
 
   "mounts": [
-    "source=go-mod-cache,target=/go/pkg/mod,type=volume"
+    "source=go-mod-cache,target=/go/pkg/mod,type=volume",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached"
   ],
 
   "runArgs": [
@@ -41,7 +43,9 @@
     "GOWORK": "off"
   },
   "remoteEnv": {
-    "PATH": "/go/bin:${containerEnv:PATH}"
+    "PATH": "/go/bin:${containerEnv:PATH}",
+    "GIT_USER": "${localEnv:GIT_USER}",
+    "GIT_EMAIL": "${localEnv:GIT_EMAIL}"
   },
 
   "postCreateCommand": "bash .devcontainer/post-create.sh"
