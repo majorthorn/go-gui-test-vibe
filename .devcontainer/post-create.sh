@@ -10,7 +10,6 @@ go test ./...
 
 # If GIT_USER or GIT_EMAIL were forwarded from the host, set them
 # but don't override an existing global config (for mounted ~/.gitconfig).
-set +e
 if [ -n "${GIT_USER:-}" ]; then
 	if ! git config --global user.name >/dev/null 2>&1; then
 		git config --global user.name "$GIT_USER"
@@ -18,10 +17,9 @@ if [ -n "${GIT_USER:-}" ]; then
 	fi
 fi
 
-			EMAIL="${GIT_EMAIL:-}"
+if [ -n "${GIT_EMAIL:-}" ]; then
 	if ! git config --global user.email >/dev/null 2>&1; then
 		git config --global user.email "$GIT_EMAIL"
 		echo "Set git user.email from GIT_EMAIL"
 	fi
 fi
-set -e
