@@ -1,0 +1,48 @@
+{
+  "name": "vibe-ssh-lift Go",
+  "image": "golang:1.26",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.Go",
+        "golangci-lint.vscode-golangci-lint",
+        "openai.chatgpt"
+      ],
+      "settings": {
+        "go.formatTool": "gofmt",
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "go.autocompleteUnimportedPackages": true,
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.watcherExclude": {
+          "**/.devcontainer/**": true,
+          "**/.git/**": true,
+          "**/build/**": true,
+          "**/dist/**": true
+        }
+      }
+    }
+  },
+
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+
+  "mounts": [
+    "source=go-mod-cache,target=/go/pkg/mod,type=volume"
+  ],
+
+  "runArgs": [
+    "--security-opt",
+    "no-new-privileges"
+  ],
+
+  "containerEnv": {
+    "GOWORK": "off"
+  },
+  "remoteEnv": {
+    "PATH": "/go/bin:${containerEnv:PATH}"
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
+}
