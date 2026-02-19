@@ -1,5 +1,5 @@
 {
-  "name": "vibe-ssh-lift Go",
+  "name": "go-gui-test-vibe Go",
   "image": "golang:1.26",
 
   "customizations": {
