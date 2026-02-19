@@ -18,7 +18,7 @@ if [ -n "${GIT_USER:-}" ]; then
 	fi
 fi
 
-if [ -n "${GIT_EMAIL:-}" ]; then
+			EMAIL="${GIT_EMAIL:-}"
 	if ! git config --global user.email >/dev/null 2>&1; then
 		git config --global user.email "$GIT_EMAIL"
 		echo "Set git user.email from GIT_EMAIL"
